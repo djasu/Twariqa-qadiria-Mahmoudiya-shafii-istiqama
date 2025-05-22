@@ -1,0 +1,28 @@
+/* Styles de base */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Cartes d'activités */
+.card {
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Pied de page */
+footer {
+    margin-top: 100px;
+}
+
+/* Icônes */
+.bi {
+    margin-right: 5px;
+}
