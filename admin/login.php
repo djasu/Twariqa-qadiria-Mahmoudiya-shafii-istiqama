@@ -1,20 +1,21 @@
 <?php
-require_once '../includes/config.php';
-require_once '../includes/auth.php';
+require_once '../contenus/config.php';
+require_once '../contenus/auth.php';
+admin_only();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = clean_input($_POST['username']);
     $password = clean_input($_POST['password']);
     
-    $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
+    $stmt = $pdo->prepare("SELECT * FROM Utilisateurs  WHERE nom = ?");
     $stmt->execute([$username]);
     $admin = $stmt->fetch();
     
-    if ($admin && password_verify($password, $admin['password'])) {
+    if ($admin && password_verify($password, $admin['mot_de_passe'])) {
         $_SESSION['admin_id'] = $admin['id'];
-        $_SESSION['username'] = $admin['username'];
+        $_SESSION['username'] = $admin['nom'];
         
-        $redirect = $_SESSION['redirect_url'] ?? '/admin/dashboard.php';
+        $redirect = $_SESSION['redirect_url'] ?? 'dashboard.php';
         unset($_SESSION['redirect_url']);
         redirect($redirect);
     } else {
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<?php include '../includes/header.php'; ?>
+<?php include '../contenus/header.php'; ?>
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card">
@@ -50,4 +51,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </div>
-<?php include '../includes/footer.php'; ?>
+<?php include '../contenus/footer.php'; ?>

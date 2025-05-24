@@ -3,7 +3,7 @@ session_start();
 
 // Configuration de la base de données
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'qadiriyya_db');
+define('DB_NAME', 'db_qadiriyya');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 

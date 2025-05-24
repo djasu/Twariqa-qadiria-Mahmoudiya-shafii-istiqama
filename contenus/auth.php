@@ -10,7 +10,7 @@ function is_logged_in() {
 function admin_only() {
     if (!is_logged_in()) {
         $_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
-        redirect('/admin/login.php');
+        redirect('../admin/login.php');
     }
 }
 
