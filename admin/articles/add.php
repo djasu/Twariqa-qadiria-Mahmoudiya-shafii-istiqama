@@ -1,50 +1,44 @@
-<?php
-require_once '../../includes/auth.php';
-admin_only();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = clean_input($_POST['title']);
-    $content = clean_input($_POST['content']);
-    $author_id = $_SESSION['admin_id'];
-    
-    // Upload de l'image
-    $image_url = null;
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-        $target_dir = "../../assets/images/uploads/";
-        $image_url = upload_file($_FILES['image'], $target_dir);
-    }
-    
-    $stmt = $pdo->prepare("INSERT INTO articles (title, content, image_url, author_id) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$title, $content, $image_url, $author_id]);
-    
-    $_SESSION['success'] = "Article publié avec succès";
-    redirect('/admin/articles/list.php');
-}
-?>
+<!-- Modal d'ajout d'article -->
+<div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form method="POST" enctype="multipart/form-data" class="modal-content">
 
-<?php include '../../includes/header.php'; ?>
-<h2>Ajouter un Article</h2>
+            <div class="modal-header">
+                <h5 class="modal-title" id="addArticleModalLabel">Ajouter un article</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
 
-<form method="POST" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="title" class="form-label">Titre</label>
-        <input type="text" class="form-control" id="title" name="title" required>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Titre</label>
+                    <input type="text" class="form-control" id="title" name="titre" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="content" class="form-label">Contenu</label>
+                    <textarea class="form-control" id="content" name="contenu" rows="6" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                </div>
+
+                <div class="mb-3">
+                    <label for="date_publication" class="form-label">Date de publication</label>
+                    <input type="date" class="form-control" id="date_publication" name="date_publication">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Publier</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            </div>
+
+        </form>
     </div>
-    
-    <div class="mb-3">
-        <label for="content" class="form-label">Contenu</label>
-        <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
-    </div>
-    
-    <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
-        <input type="file" class="form-control" id="image" name="image" accept="image/*">
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Publier</button>
-    <a href="/admin/articles/list.php" class="btn btn-secondary">Annuler</a>
-</form>
-
+</div>
 <!-- TinyMCE Editor -->
 <script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/5/tinymce.min.js"></script>
 <script>
@@ -54,5 +48,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code'
     });
 </script>
-
-<?php include '../../includes/footer.php'; ?>

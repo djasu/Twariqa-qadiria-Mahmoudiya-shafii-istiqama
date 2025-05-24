@@ -27,7 +27,7 @@ $similar_articles = $pdo->prepare("
     ORDER BY created_at DESC 
     LIMIT 3
 ");
-$similar_articles->execute([$article['author_id'], $article_id]]);
+$similar_articles->execute([$article['author_id'], $article_id]);
 $similar_articles = $similar_articles->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
