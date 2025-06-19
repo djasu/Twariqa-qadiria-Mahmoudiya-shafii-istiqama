@@ -1,7 +1,6 @@
 <?php
 require_once '../contenus/config.php';
 require_once '../contenus/auth.php';
-admin_only();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = clean_input($_POST['username']);

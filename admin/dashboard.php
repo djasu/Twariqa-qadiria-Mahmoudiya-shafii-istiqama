@@ -5,7 +5,7 @@ admin_only();
 // Récupérer les statistiques
 $articles_count = $pdo->query("SELECT COUNT(*) FROM articles")->fetchColumn();
 $activities_count = $pdo->query("SELECT COUNT(*) FROM evenements")->fetchColumn();
-$unread_contacts = $pdo->query("SELECT COUNT(*) FROM contacts ")->fetchColumn();
+$unread_contacts = $pdo->query("SELECT COUNT(*) FROM contact ")->fetchColumn();
 ?>
 <?php include '../contenus/admin/head.php'; ?>
 
