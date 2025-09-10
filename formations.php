@@ -78,7 +78,7 @@ $formations = $pdo->query("
                                     <div class="card-footer d-flex justify-content-between align-items-center">
                                         <span>formateur(trice): <small>
                                                 <?= htmlspecialchars($formation['formateur']) ?></small></span>
-                                        <form method="post" action="inscription_formation.php" class="d-inline">
+                                        <form method="post" action="users/inscription_formation.php" class="d-inline">
                                             <input type="hidden" name="formation_id" value="<?= $formation['id'] ?>">
                                             <button type="submit" class="btn btn-warning">s'inscrire</button>
                                         </form>

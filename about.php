@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php  require_once 'contenus/config.php';
+<?php require_once 'contenus/config.php';
 
 // Récupérer les statistiques
 $articles_count = $pdo->query("SELECT COUNT(*) FROM articles")->fetchColumn();
@@ -13,7 +13,7 @@ $formations_count = $pdo->query("SELECT COUNT(*) FROM formations ")->fetchColumn
 
 <body class="about-page">
 
-<?php include 'contenus/header.php'; ?>
+  <?php include 'contenus/header.php'; ?>
 
   <main class="main">
     <!-- Page Title -->
@@ -31,12 +31,12 @@ $formations_count = $pdo->query("SELECT COUNT(*) FROM formations ")->fetchColumn
     <!-- Hero Section -->
     <?php include 'section-about/about1.php'; ?>
     <!-- /Hero Section -->
-<?php include 'section-about/stats.php'; ?>
+    <?php include 'section-about/stats.php'; ?>
   </main>
 
   <?php include 'contenus/footer.php'; ?>
 
-<?php include 'contenus/script.php'; ?>
+  <?php include 'contenus/script.php'; ?>
 
 </body>
 

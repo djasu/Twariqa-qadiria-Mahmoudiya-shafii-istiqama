@@ -1,21 +1,21 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-<div class="app-brand demo d-flex align-items-center justify-content-between px-3 py-2 rounded shadow-sm bg-light">
-  <a href="index.html" class="app-brand-link d-flex align-items-center text-decoration-none">
-    <img src="../assets//images/img/images (1).png" alt="Logo" width="32" height="32" class="me-2"> <!-- Ajoute un logo si tu en as -->
-    <span class="app-brand-text fw-bold text-success fs-5 text-uppercase">Qadiriyya</span>
-  </a>
+  <div class="app-brand demo d-flex align-items-center justify-content-between px-3 py-2 rounded shadow-sm bg-light">
+    <a href="../index.php" class="app-brand-link d-flex align-items-center text-decoration-none">
+      <img src="../assets//images/img/images (1).png" alt="Logo" width="32" height="32" class="me-2">
+      <!-- Ajoute un logo si tu en as -->
+      <span class="app-brand-text fw-bold text-success fs-5 text-uppercase">Qadiriyya</span>
+    </a>
 
-  <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-dark d-xl-none">
-    <i class="bx bx-menu bx-sm"></i>
-  </a>
-</div>
-
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-dark d-xl-none">
+      <i class="bx bx-menu bx-sm"></i>
+    </a>
+  </div>
 
   <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
-    <li class="menu-item">
+    <li class="menu-item active">
       <a href="../admin/dashboard.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Analytics">Dashboard</div>
@@ -46,10 +46,34 @@
     <li class="menu-item ">
       <a href="../admin/formation.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-chalkboard"></i>
-        <div data-i18n="Basic">Formations</div>
+        <div data-i18n="Basic">Talim</div>
       </a>
     </li>
 
+    <li class="menu-item ">
+      <a href="../admin/module.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-chalkboard"></i>
+        <div data-i18n="Basic">Modules</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="../admin/lesson.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-chalkboard"></i>
+        <div data-i18n="Basic">Dars</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="../admin/quiz.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-chalkboard"></i>
+        <div data-i18n="Basic">Quis</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="../admin/certifications.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-chalkboard"></i>
+        <div data-i18n="Basic">Certifications</div>
+      </a>
+    </li>
     <li class="menu-item ">
       <a href="../admin/ressources.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-folder"></i>
@@ -61,6 +85,18 @@
       <a href="../admin/utilisateur.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-user-circle"></i>
         <div data-i18n="Basic">Utilisateurs</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="../admin/etudiant.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-user-circle"></i>
+        <div data-i18n="Basic">Etudiants</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="../admin/visiteur.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-chalkboard"></i>
+        <div data-i18n="Basic">Visiteurs</div>
       </a>
     </li>
 

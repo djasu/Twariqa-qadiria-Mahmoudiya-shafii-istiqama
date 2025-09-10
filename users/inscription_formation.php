@@ -1,5 +1,5 @@
 <?php
-require_once 'contenus/config.php';
+require_once '../contenus/config.php';
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['etudiant_id'])) {

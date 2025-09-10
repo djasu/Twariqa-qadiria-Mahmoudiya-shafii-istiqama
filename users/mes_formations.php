@@ -59,7 +59,7 @@ include 'include/head.php';
                 <?php if (empty($formations)): ?>
                     <div class="alert alert-info">
                         Vous n'êtes inscrit à aucune formation.
-                        <a href="formations.php">Parcourir les formations disponibles</a>
+                        <a href="../formations.php">Parcourir les formations disponibles</a>
                     </div>
                 <?php else: ?>
                     <div class="row">

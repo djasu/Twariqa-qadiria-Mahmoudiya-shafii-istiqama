@@ -1,0 +1,193 @@
+<?php
+require_once '../../contenus/config.php';
+require_once '../../contenus/functions.php';
+require_once '../../contenus/auth.php';
+admin_only();
+
+$evenement_id = $_GET['id'] ?? 0;
+
+// Récupérer l'article à éditer
+$stmt = $pdo->prepare("SELECT * FROM evenements WHERE id = ?");
+$stmt->execute([$evenement_id]);
+$evenement = $stmt->fetch();
+
+if (!$evenement) {
+    $_SESSION['error'] = "Activite introuvable";
+    redirect('../activite.php');
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $titre = clean_input($_POST['titre']);
+    $description = clean_input($_POST['description']);
+    $date = clean_input($_POST['date']);
+    $lieu = clean_input($_POST['lieu']);
+    $type = clean_input($_POST['type']);
+
+
+    $stmt = $pdo->prepare("UPDATE `evenements` SET `titre`=?,`description`=?,`date`=?,`lieu`=?,`type`=? WHERE id = ?");
+    $stmt->execute([$titre, $description, $date, $lieu, $type, $evenement_id]);
+
+    $_SESSION['success'] = "Activite mis à jour avec succès";
+    redirect('../activite.php');
+}
+?>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>qadiriyya</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets//images/img/images (1).png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+    <!-- Boxicons CDN -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <?php include '../../contenus/admin/aside.php'; ?>
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <!-- Place this tag where you want the button to render. -->
+                            <li class="nav-item lh-1 me-3">
+                                <?php $author_id = $_SESSION['username']; ?>
+                                <a class="github-button"
+                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                                    data-icon="octicon-star" data-size="large" data-show-count="true"
+                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"><?php echo $author_id; ?></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> Modifier l'Activite</h5>
+                                        <form method="POST" enctype="multipart/form-data">
+                                            <div class="mb-3">
+                                                <label for="title" class="form-label">Titre</label>
+                                                <input type="text" class="form-control" id="title" name="titre"
+                                                   value="<?= htmlspecialchars($evenement['titre']) ?>" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="description" class="form-label">Description</label>
+                                                <textarea class="form-control" id="description" name="description"
+                                                     rows="6" required><?= htmlspecialchars($evenement['description']) ?></textarea>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="type" class="form-label">Type d'événement</label>
+                                                <select class="form-select" id="type" name="type" required>
+                                                    <option value=""><?= htmlspecialchars($evenement['type']) ?></option>
+                                                    <option value="Zikr">Zikr</option>
+                                                    <option value="Conférence">Conférence</option>
+                                                    <option value="Mawlid">Mawlid</option>
+                                                    <option value="Retraite spirituelle">Retraite spirituelle
+                                                    </option>
+                                                    <option value="Cours">Cours</option>
+                                                    <option value="Visite sociale">Visite sociale</option>
+                                                    <option value="Célébration">Célébration</option>
+                                                    <option value="Autre">Autre</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lieu" class="form-label">Lieu</label>
+                                                <input type="text" class="form-control" id="lieu" name="lieu" value="<?= htmlspecialchars($evenement['lieu']) ?>" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="date" class="form-label">Date de l'événement</label>
+                                                <input type="date" class="form-control" id="date" name="date" value="<?= htmlspecialchars($evenement['date']) ?>" required>
+                                            </div>
+
+
+                                            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                            <a href="../activite.php" class="btn btn-secondary">Annuler</a>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- / Content -->
+
+                <!-- Footer -->
+                <?php include '../../contenus/admin/footer.php'; ?>
+                <!-- / Footer -->
+
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+
+    <?php include '../../contenus/admin/script.php'; ?>
+    <!-- TinyMCE Editor -->
+    <script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/5/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#content',
+            plugins: 'link image table code',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
+            height: 400
+        });
+    </script>
+</body>

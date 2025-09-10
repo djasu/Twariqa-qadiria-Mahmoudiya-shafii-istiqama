@@ -3,7 +3,7 @@
       <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
         <div class="carousel-item active">
-          <img src="assets/images/img/carousel/car1.jpeg" alt="">
+          <img src="assets/images/img/carousel/1.jpeg" alt="">
           <div class="carousel-container">
             <h2>Bienvenu a qadiriyya<br></h2>
             <p>Confrérie soufie suivant l'enseignement de Cheikh Abdelkader Al-Jilani</p>

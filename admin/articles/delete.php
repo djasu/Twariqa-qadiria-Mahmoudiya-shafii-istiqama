@@ -1,7 +1,8 @@
 <?php
-require_once '../../includes/auth.php';
+require_once '../../contenus/config.php';
+require_once '../../contenus/functions.php';
+require_once '../../contenus/auth.php';
 admin_only();
-
 $article_id = $_GET['id'] ?? 0;
 
 // Vérifier que l'article existe
@@ -11,12 +12,12 @@ $article = $stmt->fetch();
 
 if (!$article) {
     $_SESSION['error'] = "Article introuvable";
-    redirect('/admin/articles/list.php');
+    redirect('../article.php');
 }
 
 // Supprimer l'image associée si elle existe
-if ($article['image_url'] && file_exists("../../assets/images/uploads/{$article['image_url']}")) {
-    unlink("../../assets/images/uploads/{$article['image_url']}");
+if ($article['image'] && file_exists("../../assets/images/articles/{$article['image']}")) {
+    unlink("../../assets/images/articles/{$article['image']}");
 }
 
 // Supprimer l'article
@@ -24,5 +25,5 @@ $stmt = $pdo->prepare("DELETE FROM articles WHERE id = ?");
 $stmt->execute([$article_id]);
 
 $_SESSION['success'] = "Article supprimé avec succès";
-redirect('/admin/articles/list.php');
+redirect('../article.php');
 ?>

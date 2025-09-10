@@ -6,7 +6,7 @@
 $activities_count = $pdo->query("SELECT COUNT(*) FROM evenements")->fetchColumn();
 ?>
 <?php $evenements = $pdo->query("
-    SELECT e.*,g.fichier as image FROM evenements e
+    SELECT e.*,g.fichier as image,g.type as typef FROM evenements e
     right join galerie g on e.id = g.evenement_id
     ORDER BY created_on DESC 
     LIMIT 6
@@ -56,10 +56,15 @@ $activities_count = $pdo->query("SELECT COUNT(*) FROM evenements")->fetchColumn(
                         <?php foreach ($evenements as $evenement): ?>
                             <div class="col">
                                 <div class="card shadow-sm">
-                                    <?php if ($evenement['image']): ?>
+                                    <?php if (in_array($evenement['typef'], ['photo', 'image'])): ?>
                                         <img src="assets/images/galeries/<?= $evenement['image'] ?>"
                                             class="bd-placeholder-img card-img-top" width="100%" height="225"
                                             alt="<?= htmlspecialchars($evenement['titre']) ?>">
+                                    <?php elseif ($evenement['typef'] ==='video'): ?>
+                                        <video width="100%" controls>
+                                            <source src="assets/images/galeries/<?= $evenement['image'] ?>" type="video/mp4">
+                                            Votre navigateur ne supporte pas la vidéo.
+                                        </video>
                                     <?php endif; ?>
                                     <div class="card-body">
                                         <p class="card-text"><?= substr($evenement['description'], 0, 100) ?></p>

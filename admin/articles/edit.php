@@ -1,5 +1,7 @@
 <?php
-require_once '../../includes/auth.php';
+require_once '../../contenus/config.php';
+require_once '../../contenus/functions.php';
+require_once '../../contenus/auth.php';
 admin_only();
 
 $article_id = $_GET['id'] ?? 0;
@@ -11,78 +13,179 @@ $article = $stmt->fetch();
 
 if (!$article) {
     $_SESSION['error'] = "Article introuvable";
-    redirect('/admin/articles/list.php');
+    redirect('../article.php');
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = clean_input($_POST['title']);
-    $content = clean_input($_POST['content']);
-    
+    $title = clean_input($_POST['titre']);
+    $content = clean_input($_POST['contenu']);
+
     // Gestion de l'image
-    $image_url = $article['image_url'];
+    $image_url = $article['image'];
     if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
         // Supprimer l'ancienne image si elle existe
-        if ($image_url && file_exists("../../assets/images/uploads/$image_url")) {
-            unlink("../../assets/images/uploads/$image_url");
+        if ($image_url && file_exists("../../assets/images/articles/$image_url")) {
+            unlink("../../assets/images/articles/$image_url");
         }
-        
+
         // Uploader la nouvelle image
-        $target_dir = "../../assets/images/uploads/";
+        $target_dir = "../../assets/images/articles/";
         $image_url = upload_file($_FILES['image'], $target_dir);
     }
-    
-    $stmt = $pdo->prepare("UPDATE articles SET title = ?, content = ?, image_url = ? WHERE id = ?");
+
+    $stmt = $pdo->prepare("UPDATE articles SET titre = ?, contenu = ?, image = ? WHERE id = ?");
     $stmt->execute([$title, $content, $image_url, $article_id]);
-    
+
     $_SESSION['success'] = "Article mis à jour avec succès";
-    redirect('/admin/articles/list.php');
+    redirect('../article.php');
 }
 ?>
 
-<?php include '../../includes/header.php'; ?>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<h2>Modifier l'Article</h2>
+    <title>qadiriyya</title>
 
-<form method="POST" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="title" class="form-label">Titre</label>
-        <input type="text" class="form-control" id="title" name="title" 
-               value="<?= htmlspecialchars($article['title']) ?>" required>
-    </div>
-    
-    <div class="mb-3">
-        <label for="content" class="form-label">Contenu</label>
-        <textarea class="form-control" id="content" name="content" rows="10" required>
-            <?= htmlspecialchars($article['content']) ?>
-        </textarea>
-    </div>
-    
-    <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
-        <input type="file" class="form-control" id="image" name="image" accept="image/*">
-        
-        <?php if ($article['image_url']): ?>
-            <div class="mt-2">
-                <img src="/assets/images/uploads/<?= $article['image_url'] ?>" 
-                     alt="Image actuelle" style="max-height: 200px;">
-                <p class="text-muted mt-1">Image actuelle</p>
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets//images/img/images (1).png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+    <!-- Boxicons CDN -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <?php include '../../contenus/admin/aside.php'; ?>
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <!-- Place this tag where you want the button to render. -->
+                            <li class="nav-item lh-1 me-3">
+                                <?php $author_id = $_SESSION['username']; ?>
+                                <a class="github-button"
+                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                                    data-icon="octicon-star" data-size="large" data-show-count="true"
+                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"><?php echo $author_id; ?></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> Modifier l'Article</h5>
+                                        <form method="POST" enctype="multipart/form-data">
+                                            <div class="mb-3">
+                                                <label for="title" class="form-label">Titre</label>
+                                                <input type="text" class="form-control" id="title" name="titre"
+                                                    value="<?= htmlspecialchars($article['titre']) ?>" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="content" class="form-label">Contenu</label>
+                                                <textarea class="form-control" id="content" name="contenu" rows="10"
+                                                    required><?= htmlspecialchars($article['contenu']) ?>
+                                                </textarea>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="image" class="form-label">Image</label>
+                                                <input type="file" class="form-control" id="image" name="image"
+                                                    accept="image/*">
+
+                                                <?php if ($article['image']): ?>
+                                                    <div class="mt-2">
+                                                        <img src="../../assets/images/articles/<?= $article['image'] ?>"
+                                                            alt="Image actuelle" style="max-height: 200px;">
+                                                        <p class="text-muted mt-1">Image actuelle</p>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                            <a href="../article.php" class="btn btn-secondary">Annuler</a>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- / Content -->
+
+                <!-- Footer -->
+                <?php include '../../contenus/admin/footer.php'; ?>
+                <!-- / Footer -->
+
+                <div class="content-backdrop fade"></div>
             </div>
-        <?php endif; ?>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
     </div>
-    
-    <button type="submit" class="btn btn-primary">Mettre à jour</button>
-    <a href="/admin/articles/list.php" class="btn btn-secondary">Annuler</a>
-</form>
 
-<!-- TinyMCE Editor -->
-<script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/5/tinymce.min.js"></script>
-<script>
-    tinymce.init({
-        selector: '#content',
-        plugins: 'link image table code',
-        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
-        height: 400
-    });
-</script>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
 
-<?php include '../../includes/footer.php'; ?>
+    <?php include '../../contenus/admin/script.php'; ?>
+    <!-- TinyMCE Editor -->
+    <script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/5/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#content',
+            plugins: 'link image table code',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
+            height: 400
+        });
+    </script>
+</body>
