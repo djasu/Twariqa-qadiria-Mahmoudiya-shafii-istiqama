@@ -30,5 +30,8 @@
 
   <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
+      <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
   <!-- Page CSS -->
 </head>

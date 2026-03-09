@@ -13,7 +13,7 @@ $galeries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php if (isset($_SESSION['success'])): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <?= $_SESSION['success'] ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
     </div>
     <?php unset($_SESSION['success']); ?>
 <?php endif; ?>
@@ -57,8 +57,8 @@ $galeries = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </td>
                     <td><?= htmlspecialchars($item['created_on']) ?></td>
                     <td>
-                        <a href="edit_galerie.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-warning">éditer</a>
-                        <a href="delete_galerie.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-danger delete-btn">suppr.</a>
+                        <a href="galeries/edit.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-warning">Update</a>
+                        <a href="galeries/delete.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-danger delete-btn">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

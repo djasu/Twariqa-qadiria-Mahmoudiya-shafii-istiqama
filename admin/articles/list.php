@@ -38,11 +38,14 @@ $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($article['auteur']) ?></td>
                     <td><?= htmlspecialchars($article['created_on']) ?></td>
                     <td>
-                        <a href="edit.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-warning">
-                            edit
+                        <a href="articles/edit.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-warning">
+                            Update
                         </a>
-                        <a href="delete.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-danger delete-btn">
-                            del
+                        <a href="articles/delete.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-danger delete-btn">
+                            Delete
+                        </a>
+                        <a href="articles/delete.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-secondary delete-btn">
+                            Vieu
                         </a>
                     </td>
                 </tr>

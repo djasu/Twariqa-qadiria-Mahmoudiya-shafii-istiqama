@@ -22,7 +22,6 @@ $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tr>
                 <th>#</th>
                 <th>Titre</th>
-                <th>Description</th>
                 <th>Formateur</th>
                 <th>Image</th>
                 <th>Début</th>
@@ -35,7 +34,6 @@ $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <tr>
                     <td><?= $formation['id'] ?></td>
                     <td><?= htmlspecialchars($formation['titre']) ?></td>
-                    <td><?= htmlspecialchars($formation['description']) ?></td>
                     <td><?= htmlspecialchars($formation['formateur']) ?></td>
                     <td>
                         <?php if (!empty($formation['image'])): ?>
@@ -47,8 +45,8 @@ $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($formation['date_debut']) ?></td>
                     <td><?= htmlspecialchars($formation['date_fin']) ?></td>
                     <td>
-                        <a href="edit_formation.php?id=<?= $formation['id'] ?>" class="btn btn-sm btn-warning">éditer</a>
-                        <a href="delete_formation.php?id=<?= $formation['id'] ?>" class="btn btn-sm btn-danger delete-btn">suppr.</a>
+                        <a href="formations/edit.php?id=<?= $formation['id'] ?>" class="btn btn-sm btn-warning">Update</a>
+                        <a href="formations/delete.php?id=<?= $formation['id'] ?>" class="btn btn-sm btn-danger delete-btn">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

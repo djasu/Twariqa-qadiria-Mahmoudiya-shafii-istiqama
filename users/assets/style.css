@@ -1,0 +1,283 @@
+.dashboard-page {
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+    padding: 0.75rem 1rem;
+    border-left: 4px solid transparent;
+}
+
+.sidebar .nav-link.active {
+    color: #007bff;
+    border-left: 4px solid #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.sidebar .nav-link:hover {
+    color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.sidebar .nav-link i {
+    margin-right: 4px;
+    color: #6c757d;
+}
+
+.sidebar .nav-link.active i,
+.sidebar .nav-link:hover i {
+    color: inherit;
+}
+
+.main {
+    margin-left: 0;
+    padding: 20px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .main {
+        margin-left: 250px;
+    }
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, .075);
+    transition: all 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .15);
+}
+
+.progress {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.stat-card {
+    border-left: 4px solid;
+}
+
+.stat-card.border-primary {
+    border-left-color: #007bff;
+}
+
+.stat-card.border-success {
+    border-left-color: #28a745;
+}
+
+.stat-card.border-info {
+    border-left-color: #17a2b8;
+}
+
+.mes-formations-page {
+    padding: 20px;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+.mes-formations-page .card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.mes-formations-page .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.mes-formations-page .card-img-top {
+    height: 150px;
+    object-fit: cover;
+}
+
+.mes-formations-page .progress {
+    border-radius: 10px;
+}
+
+.mes-formations-page .progress-bar {
+    border-radius: 10px;
+}
+
+.mes-formations-page .badge {
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+/* Filtres */
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.filter-status {
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 20px;
+    background: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+}
+
+.filter-status.active,
+.filter-status:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.progression-page {
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+.progression-page .progress {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.progression-page .table th {
+    border-top: none;
+    font-weight: 500;
+}
+
+.progression-page .table td {
+    vertical-align: middle;
+}
+
+.progress-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: conic-gradient(#28a745 var(--progress), #e9ecef var(--progress));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-circle::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: white;
+    border-radius: 50%;
+}
+
+.progress-circle-value {
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Page Certificats */
+.certificats-page .certificate-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: all 0.3s;
+}
+
+.certificats-page .certificate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.certificats-page .certificate-badge {
+    color: #ffc107;
+    font-size: 3rem;
+}
+
+.certificate-card,
+.certificate-card * {
+    visibility: visible;
+}
+
+.certificate-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border: 2px solid #000 !important;
+}
+
+.certificate-card .card-footer {
+    display: none !important;
+}
+
+.certificate-card {
+    border: 2px solid #f8f9fa;
+    transition: all 0.3s;
+}
+
+.certificate-card:hover {
+    border-color: #007bff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+.certificate-badge {
+    position: relative;
+    display: inline-block;
+}
+
+.certificate-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, transparent 50%, rgba(255, 255, 255, 0.8) 70%);
+    border-radius: 50%;
+}
+
+.btn-facebook {
+    background-color: #3b5998;
+    color: white;
+}
+
+.btn-twitter {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.btn-linkedin {
+    background-color: #0077b5;
+    color: white;
+}
+
+@media print {
+
+    .sidebar,
+    .header,
+    .footer,
+    .btn-toolbar {
+        display: none !important;
+    }
+
+    .certificate-card {
+        border: 2px solid #000 !important;
+        page-break-inside: avoid;
+    }
+}

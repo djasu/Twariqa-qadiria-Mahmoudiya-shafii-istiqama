@@ -1,28 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qadiriyya - Confrérie Soufie</title>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="/">Twariqa qadiria Mahmoudiya shafii istiqama</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/about.php">À Propos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/activities.php">Activités</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/blog.php">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/contact.php">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container mt-4"></div>
+<header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+            <h1 class="sitename">qadiriyya</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="index.php" class="active">Accueil</a></li>
+                <li><a href="about.php">Appropos de nous</a></li>
+                <li class="dropdown"><a href="activites.php"><span>Activites</span> <i
+                            class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="activites.php">Activites</a></li>
+                        <li><a href="galerie.php">Galerie</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="formations.php">Formations</a></li>
+                <li><a href="ressources.php">Ressources</a></li>
+                <li><a href="articles.php">Articles</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        <a class="btn-getstarted" href="login.php">connecté</a>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    <a href="register.php" class="btn btn-primary">s'inscrire</a>
+        
+    </div>
+</header>

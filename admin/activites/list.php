@@ -38,8 +38,8 @@ $evenements = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($event['date']) ?></td>
                     <td><?= htmlspecialchars($event['created_on']) ?></td>
                     <td>
-                        <a href="edit_evenement.php?id=<?= $event['id'] ?>" class="btn btn-sm btn-warning">éditer</a>
-                        <a href="delete_evenement.php?id=<?= $event['id'] ?>" class="btn btn-sm btn-danger delete-btn">suppr.</a>
+                        <a href="activites/edit.php?id=<?= $event['id'] ?>" class="btn btn-sm btn-warning">Update</a>
+                        <a href="activites/delete.php?id=<?= $event['id'] ?>" class="btn btn-sm btn-danger delete-btn">Delete.</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

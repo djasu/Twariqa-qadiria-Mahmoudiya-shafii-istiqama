@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 <?php include '../contenus/admin/head.php'; ?>
-
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
